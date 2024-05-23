@@ -7,11 +7,8 @@ import typing
 
 
 async def async_generator() -> typing.Generator[float, None, None]:
-    """ A function that will loop 10 times, each time asynchronously wait 1 second, 
-    then yield a random number between 0 and 10
-
-    Yields:
-        Iterator[typing.Generator[float, None, None]]: random floats between 0 and 10.
+    """ A function that will loop 10 times, each time asynchronously
+    wait 1 second, then yield a random number between 0 and 10.
     """
     for _ in range(10):
         await asyncio.sleep(1)

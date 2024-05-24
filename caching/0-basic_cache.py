@@ -6,11 +6,7 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """_summary_
-
-    Args:
-        BaseCaching (_type_): _description_
-    """
+    """ Cache item """
     def __init__(self):
         """ Initialize """
         self.cache_data = {}

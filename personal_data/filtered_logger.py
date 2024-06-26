@@ -98,3 +98,27 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return mysql.connector.connect(
         user=db_username, password=db_password, host=db_host, database=db_name
     )
+
+
+def main():
+    """
+    Main function of the script.
+
+    Returns:
+        None
+    """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users")
+    logger = get_logger()
+    for row in cursor:
+        message = f"name={row[0]}; email={row[1]}; phone={row[2]}; " + \
+            f"ssn={row[3]}; password={row[4]}; ip={row[5]}; last_login=" + \
+            f"{row[6]}; user_agent={row[7]};"
+        logger.info(message)
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()

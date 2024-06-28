@@ -10,14 +10,7 @@ class Auth():
     """ Auth class
     """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Verify if path is in the excluded paths list
-
-        Args:
-            path (str): The path to verify
-            excluded_paths (List[str]): The list of excluded paths
-
-        Returns:
-            bool: boolean respnse
+        """ require_auth method
         """
         if path is None or not excluded_paths:
             return True
@@ -27,18 +20,14 @@ class Auth():
         return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
-        """_summary_
-
-        Args:
-            request (_type_, optional): _description_. Defaults to None.
-
-        Returns:
-            str: _description_
+        """ authorization_header method
         """
-        return None
+        if request is None or "Authorization" not in request.headers:
+            return None
+        return request.headers["Authorization"]
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """_summary_
+        """ current_user method
 
         Returns:
             _type_: _description_

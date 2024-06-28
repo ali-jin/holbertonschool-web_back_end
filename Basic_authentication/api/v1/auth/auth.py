@@ -21,7 +21,6 @@ class Auth():
         """
         return False
 
-
     def authorization_header(self, request=None) -> str:
         """_summary_
 
@@ -32,7 +31,6 @@ class Auth():
             str: _description_
         """
         return None
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """_summary_

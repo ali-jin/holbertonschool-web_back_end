@@ -40,6 +40,9 @@ def forbidden(error) -> str:
 
 
 def before_request() -> None:
+    """
+    Function that is executed before each request.
+    """
     if auth is None:
         return
 

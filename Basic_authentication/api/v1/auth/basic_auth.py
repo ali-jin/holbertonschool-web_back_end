@@ -2,9 +2,10 @@
 """
 BasicAuth class
 """
+from .auth import Auth
 
 
-class BasicAuth():
+class BasicAuth(Auth):
     """ BasicAuth class
     """
     pass

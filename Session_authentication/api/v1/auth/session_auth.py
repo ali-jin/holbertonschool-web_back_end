@@ -64,6 +64,16 @@ class SessionAuth(Auth):
         return User.get(user_id)
 
     def destroy_session(self, request=None):
+        """
+        Destroys a session.
+
+        Args:
+            request (Request): The request object.
+
+        Returns:
+            bool: True if the session was successfully destroyed,
+                False otherwise.
+        """
         if request is None:
             return False
         session_id = self.session_cookie(request)

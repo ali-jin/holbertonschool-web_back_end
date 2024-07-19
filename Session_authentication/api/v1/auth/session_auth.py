@@ -47,23 +47,19 @@ class SessionAuth(Auth):
         return self.user_id_by_session_id.get(session_id)
 
 
-def current_user(self, request=None):
-    """Get user from the cookie value.
+    def current_user(self, request=None):
+        """Get user from the cookie value.
 
-    Args:
-        request (Request): Request object.
+        Args:
+            request (Request): Request object.
 
-    Returns:
-        User: Returns the current user based on a cookie value.
-    """
-    session_id = self.session_cookie(request)
+        Returns:
+            User: Returns the current user based on a cookie value.
+        """
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
 
-    if session_id is None:
-        return None
+        if user_id is None:
+            return None
 
-    user_id = self.user_id_for_session_id(session_id)
-
-    if user_id is None:
-        return None
-
-    return User.get(user_id)
+        return User.get(user_id)

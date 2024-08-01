@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ app module """
-import re
 from auth import Auth
 from flask import Flask, jsonify, request, abort
 

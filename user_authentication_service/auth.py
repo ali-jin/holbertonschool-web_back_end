@@ -2,6 +2,8 @@
 """ auth module """
 import bcrypt
 import uuid
+
+from requests import session
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
@@ -65,4 +67,4 @@ class Auth:
 
     def destroy_session(self, user_id: int) -> None:
         """ Destroy a session """
-        self._db.update_user(user_id, id=None)
+        self._db.update_user(user_id, session_id=None)

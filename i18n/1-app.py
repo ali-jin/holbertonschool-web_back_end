@@ -11,13 +11,14 @@ class Config:
 
 
 app = Flask(__name__)
+app.config.from_object(Config)
 babel = Babel(app)
 
 
 @app.route('/')
-def hello_world():
-    """ Render HTML """
-    return render_template('0-index.html')
+def index():
+    """ Index page """
+    return render_template('1-index.html')
 
 
 if __name__ == "__main__":

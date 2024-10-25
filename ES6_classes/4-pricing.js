@@ -7,7 +7,7 @@ export default class Pricing {
     this._currency = currency;
   }
 
-  // getter and setter for amount
+  // getter and setter from amount
   get amount() {
     return this._amount;
   }
@@ -16,7 +16,7 @@ export default class Pricing {
     this._amount = newAmount;
   }
 
-  // getter and setter for currency
+  // getter and setter from currency
   get currency() {
     return this._currency;
   }

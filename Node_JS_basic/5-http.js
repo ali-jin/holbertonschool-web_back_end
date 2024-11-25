@@ -3,7 +3,7 @@ const http = require('http');
 const args = process.argv.slice(2);
 const countStudents = require('./3-read_file_async');
 
-const DATABASE = args[0];
+const DATABASE = args[2];
 
 const hostname = '127.0.0.1';
 const port = 1245;
@@ -30,7 +30,7 @@ const app = http.createServer(async (req, res) => {
 });
 
 app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  //console.log(`Server running at http://${hostname}:${port}/`);
 });
 
 module.exports = app;

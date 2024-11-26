@@ -1,3 +1,5 @@
+import readDatabase from '../utils';
+
 class StudentsController {
   static getAllStudents(request, response, DB) {
     readDatabase(DB).then((result) => {

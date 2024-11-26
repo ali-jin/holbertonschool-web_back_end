@@ -1,30 +1,30 @@
 /* eslint-disable */
-const http = require('http');
+const http = require('node:http');
+const process = require('node:process');
+const DebugHolberton = require('./debug');
 const countStudents = require('./3-read_file_async');
 
-const hostname = '127.0.0.1';
-const port = 1245;
-
+const d = new DebugHolberton();
+d.fetch();
 const app = http.createServer(async (req, res) => {
-  res.statusCode = 200;
-  if (req.url === '/') {
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    let dbInfo = 'This is the list of our students\n';
-    await countStudents(process.argv[2])
-      .then((msg) => {
-        dbInfo += msg;
-        res.end(dbInfo);
+  if (req.url === '/students') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+
+    countStudents(process.argv[2])
+      .then((result) => {
+        res.write('This is the list of our students\n');
+        res.write(result);
       })
-      .catch((err) => {
-        dbInfo += err.message;
-        res.end(dbInfo);
+      .catch(() => {
+        res.write('This is the list of our students\n');
+        res.write('Cannot load the database');
+      }).finally(() => {
+        res.end();
       });
+  } else if (req.url === '/') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello Holberton School!');
   }
 });
-
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}`);
-});
-
+app.listen(1245);
 module.exports = app;

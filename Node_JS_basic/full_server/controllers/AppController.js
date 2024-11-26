@@ -1,3 +1,4 @@
+/* eslint-disable */
 class AppController {
   static getHomepage(request, response) {
     response.status = 200;

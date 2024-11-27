@@ -1,24 +1,31 @@
 /* eslint-disable */
-const fs = require('fs');
+import fs from 'fs/promises';
 
 export default function readDatabase(path) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
-        reject(Error('Cannot load the database'));
-      } else {
-        const [headerLine, ...lines] = data.split('\n').filter((line) => line.length > 0);
-        const headers = headerLine.split(',');
+  return new Promise((resolve, rejet) => {
+    fs.readFile(path, 'utf8').then((data) => {
+      let nb = 0;
+      const arrStr = [];
+      const dict = new Map();
 
-        const listObj = lines.map((line) => line.split(',').reduce((object, currentValue, index) => Object.assign(object, { [headers[index]]: currentValue }), {}));
-
-        const groupByField = listObj.reduce((res, currentValue) => {
-          res[currentValue.field] = res[currentValue.field] || [];
-          res[currentValue.field].push(currentValue.firstname);
-          return res;
-        }, {});
-        resolve(groupByField);
+      data.split('\n').forEach((line, idx) => {
+        if (idx === 0) return;
+        if (line.length === 0) return;
+        nb += 1;
+        const arr = line.split(',');
+        // arrStr.push(arr[0]);
+        const entry = dict.get(arr[3]);
+        dict.set(arr[3], [...entry || [], arr[0]]);
+      });
+      arrStr.push(`Number of students: ${nb}`);
+      for (const [k, v] of dict.entries()) {
+        arrStr.push(`Number of students in ${k}: ${v.length}. List: ${v.join(', ')}`);
+        // arrStr.push(v[0]);
       }
+      resolve(arrStr.join('\n'));
+      // resolve(arrStr);
+    }).catch((e) => {
+      rejet(new Error(`Cannot load the database ${e}`));
     });
   });
 }

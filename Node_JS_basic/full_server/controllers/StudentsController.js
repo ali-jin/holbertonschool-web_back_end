@@ -1,35 +1,29 @@
 /* eslint-disable */
 import readDatabase from '../utils';
 
-class StudentsController {
-  static getAllStudents(request, response, DB) {
-    readDatabase(DB).then((result) => {
-      const students = [];
-      students.push('This is the list of our students');
-      Object.keys(result).sort().forEach((key) => {
-        students.push(`Number of students in ${key}: ${result[key].length}. List: ${result[key].join(', ')}`);
-      });
-      response.status(200);
-      response.send(students.join('\n'));
-    }).catch((error) => {
-      response.status(500);
-      response.send(error.message);
-    });
+export default class StudentsController {
+  static async getAllStudents(request, response) {
+    try {
+      const students = await readDatabase(process.argv[2]);
+      response.status(200).send(`This is the list of our students\n${students}`);
+    } catch (e) {
+      response.status(500).send(`Cannot load the database${e}`);
+    }
   }
 
-  static getAllStudentsByMajor(request, response) {
-    const { major } = request.params;
-    if (major !== 'CS' && major !== 'SWE') {
-      response.status(500);
-      response.send('Major parameter must be CS or SWE');
-    } else {
-      readDatabase(DB).then((result) => {
-        response.status(200);
-        response.send(`List: ${result[major].join(', ')}`);
-      }).catch((error) => {
-        response.status(500);
-        response.send(error.message);
-      });
+  static async getAllStudentsByMajor(request, response) {
+    const m = request.params.major;
+    if (m !== 'CS' && m !== 'SWE') {
+      response.status(500).send('Major parameter must be CS or SWE');
+      return;
+    }
+    try {
+      const students = await readDatabase(process.argv[2]);
+      const correctLine = students.split('\n').filter((line) => line.includes(m));
+      const index = correctLine[0].indexOf('List:');
+      response.status(200).send(correctLine[0].slice(index));
+    } catch (e) {
+      response.status(500).send('Cannot load the database');
     }
   }
 }

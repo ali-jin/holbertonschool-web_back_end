@@ -27,12 +27,7 @@ Python annotations provide additional information on variables or functions. In 
 
 -------------------------
 ### 0. Basic annotations - add
-Write a function that retrieves an element from a list like in C.
-- Prototype: `def element_at(my_list, idx):`
-- If `idx` is negative, the function should return `None`
-- If `idx` is out of range (> of number of element in `my_list`), the function should return `None`
-- You are not allowed to import any module
-- You are not allowed to use `try/except`
+Write a type-annotated function `add` that takes a float `a` and a float `b` as arguments and returns their sum as a float.
 - File: [`0-add.py`](https://github.com/ali-jin/holbertonschool-web_back_end/blob/main/python_variable_annotations/0-add.py)
 
 -------------------------

@@ -26,14 +26,7 @@ Python annotations provide additional information on variables or functions. In 
 - A documentation is not a simple word, it’s a real sentence explaining what’s the purpose of the module, class or method (the length of it will be verified)
 
 -------------------------
-## Tasks
-
 ### 0. Basic annotations - add
-Write a type-annotated function `add` that takes a float `a` and a float `b` as arguments and returns their sum as a float.
-- File: `0-print_list_integer.py`
-
--------------------------
-### 1. Secure access to an element in a list
 Write a function that retrieves an element from a list like in C.
 - Prototype: `def element_at(my_list, idx):`
 - If `idx` is negative, the function should return `None`

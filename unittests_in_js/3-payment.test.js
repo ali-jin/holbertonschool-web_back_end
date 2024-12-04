@@ -11,6 +11,6 @@ describe('sendPaymentRequestToApi', function() {
     expect(spy.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
     expect(spy.returnValues[0]).to.equal(120);
 
-    expect();
+    spy.restore();
   })
 })

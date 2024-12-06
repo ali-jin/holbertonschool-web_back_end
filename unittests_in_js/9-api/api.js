@@ -12,7 +12,7 @@ app.get('/cart/:id(\\d+)', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`API available on localhost port 7865`)
+  console.log(`API available on localhost port ${PORT}`)
 });
 
 

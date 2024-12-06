@@ -1,6 +1,5 @@
 const chai = require("chai");
 const request = require("request");
-const { response } = require("./api");
 const expect = chai.expect;
 
 describe('Index page', () => {
@@ -19,9 +18,9 @@ describe('Index page', () => {
   });
 
   it('shoud return the correct stautus code when id is a number', (done) => {
-    request('http://localhost:7865/cart/12', (error, response, body) => {
+    request('http://localhost:7865/cart/123', (error, response, body) => {
       expect(response.statusCode).to.equal(200);
-      expect(body).to.equal('Payment methods for cart 12');
+      expect(body).to.equal('Payment methods for cart 123');
       done();
     })
   })
